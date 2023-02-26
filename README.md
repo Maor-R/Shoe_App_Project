@@ -1,4 +1,4 @@
-# REACT – Match Finding Game
+# REACT – Shoe_App_Project 
 
 This project was bootstrapped with 
 [Site demo.](https://shoe-app-maor.netlify.app/)
@@ -7,4 +7,3 @@ This project was bootstrapped with
  An application for a shoe
 store manager.
 
-# Match_Finding_Game
