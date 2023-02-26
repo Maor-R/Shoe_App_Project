@@ -254,7 +254,7 @@ a {
   text-align: center;
 }
 a:hover {
-  color: var(--bs-cyan);
+  color: rgb(237, 231, 231);
 }
 
 a:not([href]):not([class]), a:not([href]):not([class]):hover {
@@ -616,8 +616,8 @@ progress {
 }
 
 .img-fluid {
-  max-width: 50%;
-  height: 50%;
+  width: 50%;
+  height: 90%;
 }
 
 .img-thumbnail {
@@ -2914,6 +2914,7 @@ textarea.form-control-lg {
   --bs-btn-disabled-color: #fff;
   --bs-btn-disabled-bg: #2c3e50;
   --bs-btn-disabled-border-color: #2c3e50;
+  margin-top: 2rem;
 }
 
 .btn-secondary {
@@ -2931,6 +2932,7 @@ textarea.form-control-lg {
   --bs-btn-disabled-color: #fff;
   --bs-btn-disabled-bg: #95a5a6;
   --bs-btn-disabled-border-color: #95a5a6;
+  margin-top: 2rem;
 }
 
 .btn-success {
@@ -4348,6 +4350,8 @@ textarea.form-control-lg {
   margin-bottom: var(--bs-card-group-margin);
 }
 @media (min-width: 576px) {
+
+
   .card-group {
     display: flex;
     flex-flow: row wrap;
@@ -4860,6 +4864,7 @@ textarea.form-control-lg {
   margin-bottom: 0;
   border-radius: var(--bs-list-group-border-radius);
   direction: ltr;
+  
 }
 
 .list-group-numbered {
@@ -6048,7 +6053,7 @@ textarea.form-control-lg {
 
 .spinner-grow,
 .spinner-border {
-  display: inline-block;
+  display: inline-block;background-color: ;
   width: var(--bs-spinner-width);
   height: var(--bs-spinner-height);
   vertical-align: var(--bs-spinner-vertical-align);

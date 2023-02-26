@@ -30,7 +30,7 @@ const AddShoe = () => {
     event.preventDefault();
     try {
       await api.post('/Shoes', formData);
-      navigate('/');
+      navigate('/shoes');
     } catch (error) {
       console.error(error);
       setError({
@@ -38,6 +38,8 @@ const AddShoe = () => {
         message: error.response.data.message
       });
     }
+    finally{window.location.reload()}
+
   };
 
   return (

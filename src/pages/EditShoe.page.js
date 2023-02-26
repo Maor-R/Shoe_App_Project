@@ -70,6 +70,7 @@ const EditShoe = () => {
         message: error.response.data.message
       });
     }
+    finally{window.location.reload()}
   };
 
   if (loading) {

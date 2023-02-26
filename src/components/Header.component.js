@@ -61,6 +61,13 @@ const Header = () => {
       >
         Add
       </NavLink>
+
+      <NavLink
+        to='/outlet'
+        className={({ isActive }) => (isActive ? 'link active' : 'link')}
+      >
+        Outlet
+      </NavLink>
     </nav>
   );
 };

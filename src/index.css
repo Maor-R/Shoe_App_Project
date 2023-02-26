@@ -62,6 +62,8 @@ h3 {
 h1 {
   font-size: 1.8rem;
   padding: 1rem 0;
+  text-align: center;
+  margin-top: 5rem;
 }
 
 h2 {
@@ -725,12 +727,16 @@ hr {
   gap: 1.3rem;
   justify-content:start;
   direction: ltr;
+  background-color: var(--bs-cyan);
+  margin-top: 1rem;
+  border-radius: 0.3rem;
+  padding: 0.9rem;
 }
 
 .link {
-  color: var(--grey-500);
+  color: white;
 }
 
 .active {
-  color: var(--bs-cyan);
+  color: black;
 }

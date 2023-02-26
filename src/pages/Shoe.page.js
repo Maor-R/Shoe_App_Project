@@ -40,7 +40,7 @@ const Shoe = () => {
   const handleDelete = async () => {
     try {
       await api.delete(`/Shoes/${shoe.id}`);
-      navigate('/');
+      navigate('/shoes');
     } catch (error) {
       console.error(error);
       setError({
@@ -48,6 +48,8 @@ const Shoe = () => {
         message: error.response.data.message
       });
     }
+    finally{window.location.reload()}
+
   };
 
   const handleEdit = async () => {
