@@ -3,28 +3,26 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { Row, Col, Image, ListGroup, Card, Button } from 'react-bootstrap';
 
 import api from './../api/api';
-import { calcAndFormatPrice } from './../utils/index';
 
 import { Spinner } from '../components/layout';
-import { AddToCartBtn, Message } from '../components';
+import {  Message } from '../components';
 
-const Product = ({ setCart, cart, user }) => {
-  const [product, setProduct] = useState(null);
+const Shoe = () => {
+  const { shoeId } = useParams();
+  const [shoe, setShoe] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState({
     isError: false,
     message: ''
   });
 
-  const { productId } = useParams();
-
   const navigate = useNavigate();
 
   useEffect(() => {
-    const getProduct = async () => {
+    const getShoe = async () => {
       try {
-        const response = await api.get(`/products/${productId}`);
-        setProduct(response.data);
+        const response = await api.get(`/Shoes/${shoeId}`);
+        setShoe(response.data);
       } catch (error) {
         console.error(error);
         setError({
@@ -36,12 +34,12 @@ const Product = ({ setCart, cart, user }) => {
       }
     };
 
-    getProduct();
-  }, [productId]);
+    getShoe();
+  }, [shoeId]);
 
   const handleDelete = async () => {
     try {
-      await api.delete(`/products/${product.id}`);
+      await api.delete(`/Shoes/${shoe.id}`);
       navigate('/');
     } catch (error) {
       console.error(error);
@@ -53,15 +51,14 @@ const Product = ({ setCart, cart, user }) => {
   };
 
   const handleEdit = async () => {
-    navigate(`/products/${product.id}/edit`);
+    navigate(`/shoes/${shoe.id}/edit`);
   };
 
-  const price = product && calcAndFormatPrice(product.price);
 
   return (
     <>
       <Button onClick={() => navigate('/')} className='mb-3'>
-        חזרה
+        Back
       </Button>
 
       {loading ? (
@@ -74,55 +71,42 @@ const Product = ({ setCart, cart, user }) => {
         <>
           <Row>
                 <Col md={12}>
-                  <Image src={product.thumbnail} alt={product.name} fluid />
+                  <Image src={shoe.src} alt={shoe.title} fluid />
                 </Col>
                 <Col md={3}>
               <Card>
                 <ListGroup variant='flush'>
                   <ListGroup.Item>
                     <Row>
-                          <Col>שם:</Col>
+                          <Col>Name:</Col>
                           <Col>
                             <strong>
-                              {product.title}
+                              {shoe.title}
                             </strong>
                           </Col>
                         </Row>
                       </ListGroup.Item>
                       <ListGroup.Item>
                         <Row>
-                      <Col>מחיר:</Col>
+                      <Col>Price:</Col>
                       <Col>
                         <strong
-                              style={{ fontSize: price > 999 && '0.85rem' }}
+                              style={{ fontSize: shoe.price > 999 && '0.85rem' }}
                         >
-                          {product.price}{' '}ש"ח
+                          {shoe.price}{' '}ש"ח
                         </strong>
                       </Col>
                     </Row>
                   </ListGroup.Item>
-                  <ListGroup.Item>
-                    <Row>
-                      <Col>סטטוס:</Col>
-                      <Col>
-                            {product.stock > 0 ? `קיים במלאי` : `חסר במלאי`}
-                      </Col>
-                    </Row>
-                      </ListGroup.Item>
-                  <ListGroup.Item>
-                        <AddToCartBtn
-                          disabled={product.stock === 0}
-                          cart={cart} setCart={setCart} id={product.id} />
-                  </ListGroup.Item>
-                      {user && (
+
                         <>
                       <ListGroup.Item>
-                            <Button onClick={handleEdit}>ערוך מוצר</Button>
+                            <Button onClick={handleEdit}> Edit</Button>
                       </ListGroup.Item>
                       <ListGroup.Item>
-                            <Button variant="danger" onClick={handleDelete}>מחק מוצר</Button>
+                            <Button variant="danger" onClick={handleDelete}> Delete</Button>
                       </ListGroup.Item>
-                        </>)}
+                        </>
                 </ListGroup>
               </Card>
             </Col>
@@ -133,4 +117,4 @@ const Product = ({ setCart, cart, user }) => {
   );
 };
 
-export default Product;
+export default Shoe;

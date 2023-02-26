@@ -1,9 +1,9 @@
 import { Outlet } from 'react-router-dom';
 
-const SharedProductLayout = () => {
+const SharedShoeLayout = () => {
   return (
     <Outlet />
   );
 };
 
-export default SharedProductLayout;
+export default SharedShoeLayout;

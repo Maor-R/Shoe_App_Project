@@ -1,9 +1,9 @@
 import { Row, Col } from 'react-bootstrap';
 
-import { Product, Message } from './../components';
+import { Shoe, Message } from './../components';
 import { Spinner } from './../components/layout';
 
-const Home = ({ cart, setCart, products, loading, error }) => {
+const Home = ({  shoes, loading, error }) => {
 
   return (
     <Row>
@@ -14,10 +14,10 @@ const Home = ({ cart, setCart, products, loading, error }) => {
             {error.message}
         </Message>
       ) : (
-            products
-          .map((product) => (
-            <Col key={product.id} sm={12} md={6} lg={4} xl={3}>
-              <Product product={product} cart={cart} setCart={setCart} />
+            shoes
+          .map((shoe) => (
+            <Col key={shoe.id} sm={12} md={6} lg={3} xl={3}>
+              <Shoe shoe={shoe}  />
             </Col>
           ))
       )}

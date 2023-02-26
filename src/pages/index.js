@@ -1,24 +1,18 @@
 
 import Home from './Home.page';
-import Product from './Product.page';
-import Cart from './Cart.page';
+import Shoe from './Shoe.page';
 import SharedLayout from './SharedLayout.page';
 import NotFound from './NotFound.page';
-import SharedProductLayout from './SharedProductLayout.page';
-import EditProduct from './EditProduct.page';
-import AddProduct from './AddProduct.page';
-import Login from './Login.page';
-import ProtectedRoute from './ProtectedRoute';
+import SharedShoeLayout from './SharedShoeLayout.page';
+import EditShoe from './EditShoe.page';
+import AddShoe from './AddShoe.page';
 
 export {
-  Login,
   Home,
-  Product,
-  AddProduct,
-  EditProduct,
-  Cart,
+  Shoe,
+  AddShoe,
+  EditShoe,
   SharedLayout,
-  SharedProductLayout,
-  NotFound,
-  ProtectedRoute
+  SharedShoeLayout,
+  NotFound
 };

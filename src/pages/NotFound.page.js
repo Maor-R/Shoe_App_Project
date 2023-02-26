@@ -8,9 +8,9 @@ const NotFound = () => {
             className='fas fa-exclamation-triangle'
             style={{ color: '#53dbb2' }}
           ></i>{' '}
-          הדף לא נמצא
+            The page not found
         </h1>
-        <p className='large'>מצטערים, דף זה אינו קיים <br /> או שאין לך הרשאה לגשת אל הדף.</p>
+        <p className='large'>The page not found</p>
       </div>
     </>
   );

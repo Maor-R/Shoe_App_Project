@@ -12,12 +12,37 @@
   --clr-white: #fff;
   --clr-red-dark: hsl(360, 67%, 44%);
   --clr-red-light: hsl(360, 71%, 66%);
+  --bs-cyan: #3498db;
+
+    /* colors */
+    --primary-100: #e2e0ff;
+    --primary-200: #c1beff;
+    --primary-300: #a29dff;
+    --primary-400: #837dff;
+    --primary-500: #645cff;
+    --primary-600: #504acc;
+    --primary-700: #3c3799;
+    --primary-800: #282566;
+    --primary-900: #141233;
+  
+    /* grey */
+    --grey-50: #f8fafc;
+    --grey-100: #f1f5f9;
+    --grey-200: #e2e8f0;
+    --grey-300: #cbd5e1;
+    --grey-400: #94a3b8;
+    --grey-500: #64748b;
+    --grey-600: #475569;
+    --grey-700: #334155;
+    --grey-800: #1e293b;
+    --grey-900: #0f172a;
   --transition: all 0.3s linear;
   --spacing: 0.25rem;
   --radius: 0.25rem;
   --large-screen-width: 1170px;
   --small-screen-width: 90vw;
   --fixed-width: 50rem;
+  --max-width: 1120px;
 }
 
 body {
@@ -100,7 +125,7 @@ h2 {
 }
 
 .card-main {
-  height: 420px;
+  height: 290px;
 }
 
 .alert-brand {
@@ -380,7 +405,7 @@ input {
 
 @media (max-width: 1190px) {
   .card-main-md {
-    height: 480px !important;
+    height: 290px !important;
   }
 
   .form-control-lg {
@@ -480,7 +505,7 @@ input {
   }
 
   .card-main-sm {
-    height: 610px !important;
+    height: 290px !important;
   }
 
   .form-control-small {
@@ -683,4 +708,29 @@ hr {
 
 .navbar-nav a.is-active {
   font-weight: 900;
+}
+
+.section {
+  padding: 2rem 0;
+  width: 90vw;
+  max-width: var(--max-width);
+  margin: 0 auto;
+}
+
+.navbar {
+  width: 90vw;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  display: flex;
+  gap: 1.3rem;
+  justify-content:start;
+  direction: ltr;
+}
+
+.link {
+  color: var(--grey-500);
+}
+
+.active {
+  color: var(--bs-cyan);
 }

@@ -8,45 +8,40 @@ import { getItem, setItem } from './services/localStorageService';
 import {
   SharedLayout,
   Home,
-  Login,
-  Product,
-  EditProduct,
-  AddProduct,
-  Cart,
+  Shoe,
+  EditShoe,
+  AddShoe,
   NotFound,
-  SharedProductLayout,
-  ProtectedRoute
-} from './pages';
+  SharedShoeLayout} from './pages';
 
 function App() {
-  const [user, setUser] = useState(null);
-  const [cart, setCart] = useState([]);
-  const [products, setProducts] = useState([]);
+  const [shoes, setShoes] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState({
     isError: false,
     message: ''
   });
 
-  useEffect(() => {
-    const getProducts = async () => {
+  useEffect(() => { 
+    const getShoes = async () => {
       try {
         setLoading(true);
 
         const response = await api.get(
-          "/products",
+          "/Shoes",
           {
             transformResponse: [
               (data) => {
                 const parsedData = JSON.parse(data);
-                return parsedData.products.slice(0, 8);
+                console.log(parsedData)
+                return parsedData;
               }
             ]
           }
         );
 
-        setProducts(response.data);
-        setItem('products', response.data);
+        setShoes(response.data);
+        setItem('shoes', response.data);
       } catch (error) {
         console.error(error);
         setError({
@@ -58,51 +53,27 @@ function App() {
       }
     };
 
-    getProducts();
+    getShoes();
   }, []);
 
-  useEffect(() => {
-    const cartItems = getItem('cart');
-    if (cartItems.length !== 0) {
-      setCart(cartItems);
-    }
-  }, []);
 
-  useEffect(() => {
-    const userData = getItem('user');
-    if (userData.length !== 0) {
-      setUser(userData);
-    }
-  }, []);
 
   return (
     <Router>
       <Container>
         <Routes>
-          <Route path='/' element={<SharedLayout cart={cart} user={user} setUser={setUser} />}>
+          <Route path='/' element={<SharedLayout  />}>
             <Route
               index
               element={<Home
-                products={products}
-                cart={cart}
-                setCart={setCart}
+                shoes={shoes}
                 loading={loading}
                 error={error} />} />
-            <Route path='login' element={<Login user={user} setUser={setUser} />} />
-            <Route path='cart' element={<Cart cart={cart} setCart={setCart} products={products} />} />
-            <Route path='add' element={
-              <ProtectedRoute user={user}>
-                <AddProduct />
-              </ProtectedRoute>
-            } />
+            <Route path='add' element={<AddShoe />} />
 
-            <Route path='products' element={<SharedProductLayout />}>
-              <Route path=':productId' element={<Product cart={cart} setCart={setCart} user={user} />} />
-              <Route path=':productId/edit' element={
-                <ProtectedRoute user={user}>
-                  <EditProduct />
-                </ProtectedRoute>
-              } />
+            <Route path='shoes' element={<SharedShoeLayout />}>
+              <Route path=':shoeId' element={<Shoe/>} />
+              <Route path=':shoeId/edit' element={<EditShoe />} />
             </Route>
 
             <Route path='not-found' element={<NotFound />} />

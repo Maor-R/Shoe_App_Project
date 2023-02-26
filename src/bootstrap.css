@@ -248,11 +248,13 @@ sup {
 }
 
 a {
-  color: var(--bs-link-color);
+  color: var(--bs-cyan);
   text-decoration: underline;
+  direction:ltr;
+  text-align: center;
 }
 a:hover {
-  color: var(--bs-link-hover-color);
+  color: var(--bs-cyan);
 }
 
 a:not([href]):not([class]), a:not([href]):not([class]):hover {
@@ -341,6 +343,7 @@ th {
 
 label {
   display: inline-block;
+  direction: ltr;
 }
 
 button {
@@ -367,6 +370,9 @@ select {
   text-transform: none;
 }
 
+button{
+  margin-left: 0.7rem;
+}
 [role=button] {
   cursor: pointer;
 }
@@ -473,6 +479,10 @@ legend + * {
   -webkit-appearance: button;
 }
 
+input {
+  margin-bottom: 1rem;
+  direction: ltr;
+}
 output {
   display: inline-block;
 }
@@ -606,8 +616,8 @@ progress {
 }
 
 .img-fluid {
-  max-width: 100%;
-  height: auto;
+  max-width: 50%;
+  height: 50%;
 }
 
 .img-thumbnail {
@@ -1127,7 +1137,9 @@ progress {
   }
   .col-md-6 {
     flex: 0 0 auto;
-    width: 50%;
+    width: 40%;
+    margin: auto;
+    text-align: center;
   }
   .col-md-7 {
     flex: 0 0 auto;
@@ -4847,6 +4859,7 @@ textarea.form-control-lg {
   padding-left: 0;
   margin-bottom: 0;
   border-radius: var(--bs-list-group-border-radius);
+  direction: ltr;
 }
 
 .list-group-numbered {

@@ -7,9 +7,9 @@ import api from './../api/api';
 import { Spinner } from '../components/layout';
 import { Message } from '../components';
 
-const EditProduct = () => {
-  const { productId } = useParams();
-  const [product, setProduct] = useState(null);
+const EditShoe = () => {
+  const { shoeId } = useParams();
+  const [shoe, setShoe] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState({
     isError: false,
@@ -18,25 +18,20 @@ const EditProduct = () => {
   const [formData, setFormData] = useState({
     title: '',
     price: '',
-    stock: '',
-    thumbnail: '',
-    description: ''
+    src: ''
   });
 
   const navigate = useNavigate();
 
   useEffect(() => {
-    const getProduct = async () => {
+    const getShoe = async () => {
       try {
-        const response = await api.get(`/products/${productId}`);
-        setProduct(response.data);
+        const response = await api.get(`/Shoes/${shoeId}`);
+        setShoe(response.data);
         setFormData({
           title: response.data.title,
           price: response.data.price,
-          stock: response.data.stock,
-          thumbnail: response.data.thumbnail,
-          description: response.data.description
-        });
+          src: response.data.src        });
       } catch (error) {
         console.error(error);
         setError({
@@ -48,8 +43,8 @@ const EditProduct = () => {
       }
     };
 
-    getProduct();
-  }, [productId]);
+    getShoe();
+  }, [shoeId]);
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -60,14 +55,14 @@ const EditProduct = () => {
   };
 
   const handleCancel = () => {
-    navigate(`/products/${product.id}`);
+    navigate(`/shoes/${shoe.id}`);
   };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      await api.put(`/products/${productId}`, formData);
-      navigate(`/products/${productId}`);
+      await api.put(`/Shoes/${shoeId}`, formData);
+      navigate(`/shoes/${shoeId}`);
     } catch (error) {
       console.error(error);
       setError({
@@ -91,68 +86,50 @@ const EditProduct = () => {
 
   return (
     <>
-      <Button onClick={() => navigate(`/products/${product.id}`)} className='mb-3'>
-        חזרה
+      <Button onClick={() => navigate(`/shoes/${shoe.id}`)} className='mb-3'>
+        Back
       </Button>
 
       <Row>
         <Col md={6}>
           <Form onSubmit={handleSubmit}>
             <Form.Group controlId='formName'>
-              <Form.Label>שם המוצר:</Form.Label>
+              <Form.Label>Name:</Form.Label>
               <Form.Control
                 type='text'
                 name='title'
+                maxLength="40"
                 value={formData.title}
                 onChange={handleChange}
               />
             </Form.Group>
 
             <Form.Group controlId='formPrice'>
-              <Form.Label>מחיר:</Form.Label>
+              <Form.Label>Price:</Form.Label>
               <Form.Control
                 type='number'
                 name='price'
+                min="1" max="999"
                 value={formData.price}
                 onChange={handleChange}
               />
             </Form.Group>
 
-            <Form.Group controlId='formStock'>
-              <Form.Label>מלאי:</Form.Label>
-              <Form.Control
-                type='number'
-                name='stock'
-                value={formData.stock}
-                onChange={handleChange}
-              />
-            </Form.Group>
 
             <Form.Group controlId='formThumbnail'>
-              <Form.Label>תמונה:</Form.Label>
+              <Form.Label>Image:</Form.Label>
               <Form.Control
                 type='text'
-                name='thumbnail'
-                value={formData.thumbnail}
+                name='src'
+                value={formData.src}
                 onChange={handleChange}
               />
             </Form.Group>
-            <Form.Group controlId='formDescription'>
-              <Form.Label>תיאור:</Form.Label>
-              <Form.Control
-                as='textarea'
-                rows={3}
-                name='description'
-                value={formData.description}
-                onChange={handleChange}
-              />
-            </Form.Group>
-
             <Button variant='secondary' onClick={handleCancel} className='mr-2'>
-              בטל
+              Cancel
             </Button>
             <Button variant='primary' type='submit'>
-              שמור שינויים
+              Save
             </Button>
           </Form>
         </Col>
@@ -161,4 +138,4 @@ const EditProduct = () => {
   );
 };
 
-export default EditProduct;
+export default EditShoe;

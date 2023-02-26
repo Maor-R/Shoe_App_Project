@@ -2,13 +2,16 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Row, Col, Form, Button } from 'react-bootstrap';
 
+import api from './../api/api';
+
 import { Message } from '../components';
 
-const Login = ({ setUser }) => {
+const AddShoe = () => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
-    email: '',
-    password: ''
+    title: '',
+    price: '',
+    src: '',
   });
   const [error, setError] = useState({
     isError: false,
@@ -23,49 +26,61 @@ const Login = ({ setUser }) => {
     });
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    if (!formData.email || !formData.password) {
+    try {
+      await api.post('/Shoes', formData);
+      navigate('/');
+    } catch (error) {
+      console.error(error);
       setError({
         isError: true,
-        message: 'אנא מלאו את כל הפרטים'
+        message: error.response.data.message
       });
-    } else {
-      const user = { email: formData.email, name: 'John Doe' };
-      localStorage.setItem('user', JSON.stringify(user));
-      setUser(user);
-      navigate('/');
     }
   };
 
   return (
     <>
       <Button onClick={() => navigate('/')} className='mb-3'>
-        חזרה
+        Back
       </Button>
 
       <Row>
         <Col md={6}>
           <Form onSubmit={handleSubmit}>
-            <Form.Group controlId='formEmail'>
-              <Form.Label>דואר אלקטרוני:</Form.Label>
+            <Form.Group controlId='formName'>
               <Form.Control
-                type='email'
-                name='email'
-                value={formData.email}
+                type='text'
+                name='title'
+                maxLength="40"
+                placeholder='Name'
+                value={formData.title}
                 onChange={handleChange}
               />
             </Form.Group>
 
-            <Form.Group controlId='formPassword'>
-              <Form.Label>סיסמה:</Form.Label>
+            <Form.Group controlId='formPrice'>
               <Form.Control
-                type='password'
-                name='password'
-                value={formData.password}
+                type='number'
+                min="1" max="999"
+                name='price'
+                placeholder='Price'
+                value={formData.price}
                 onChange={handleChange}
               />
             </Form.Group>
+
+            <Form.Group controlId='formThumbnail'>
+              <Form.Control
+                type='text'
+                name='src'
+                placeholder='Image'
+                value={formData.src}
+                onChange={handleChange}
+              />
+            </Form.Group>
+
 
             {error.isError && (
               <Message variant='danger' dismissible={false}>
@@ -74,7 +89,7 @@ const Login = ({ setUser }) => {
             )}
 
             <Button variant='primary' type='submit'>
-              התחבר
+              Add Shoe
             </Button>
           </Form>
         </Col>
@@ -83,4 +98,4 @@ const Login = ({ setUser }) => {
   );
 };
 
-export default Login;
+export default AddShoe;
